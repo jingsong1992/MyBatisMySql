@@ -111,6 +111,20 @@ public class Common {
 		sqlSession.commit();
 	}
 	//asdf
+	
+	
+	public static MybitsUtils getMybitsUtils(){
+		MybitsUtils mybatisUtils=sqlSession.getMapper(MybitsUtils.class);
+		return mybatisUtils;
+	}
+	
+	public static void commit(){
+		sqlSession.commit();
+	}
+	
+	
+	
+	
 	public static void saveByInterface(Object obj){
 		MybitsUtils mybatisUtils=sqlSession.getMapper(MybitsUtils.class);
 		if(obj instanceof IssueBundle){
@@ -126,8 +140,7 @@ public class Common {
 			Issues issues=(Issues) obj;
 			mybatisUtils.addExcelProject(issues);
 		}
-		
-		sqlSession.commit();
+
 	}
 
 	public static void closeSqlSession() {
