@@ -11,6 +11,7 @@
 		<typeAlias alias="IssueCategory" type="com.cs.ce.vc.toolkit.vo.IssueCategory" />
 		<typeAlias alias="IssueSubCategory" type="com.cs.ce.vc.toolkit.vo.IssueSubCategory" />
 		<typeAlias alias="ExcelProject" type="com.cs.ce.vc.toolkit.vo.ExcelProject"/>
+		<typeAlias alias="Issues" type="com.cs.ce.vc.toolkit.vo.Issues"/>
 	</typeAliases>
 
 	<environments default="mysql">

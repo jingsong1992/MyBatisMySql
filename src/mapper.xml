@@ -18,4 +18,9 @@
         insert into issues(id,parent_issue_id,code,title,description,gdb_code,rm_code,type,report_version,report_project,report_time,fixed_version,status,fixed_by,sd)
          values(#{id},#{parent_issue_id},#{code},#{title},#{description},#{gdb_code},#{rm_code},#{type},#{report_version},#{report_project},#{report_time},#{fixed_version},#{status},#{fixed_by},#{sd})
     	</insert>
+    	<insert id="addIssueFunc" parameterType="Issues">
+        insert into issues(id,parent_issue_id,code,title,description,gdb_code,rm_code,type,report_version,report_project,report_time,fixed_version,status,fixed_by,fixed_time,sd,close_reason) 
+        					values(#{id},#{parent_issue_id},#{code},#{title},#{description},#{gdb_code},#{rm_code},#{type},#{report_version},#{report_project},#{report_time}
+        					,#{fixed_version},#{status},#{fixed_by},#{fixed_time},#{sd},#{closed_reason})
+        </insert>
 	</mapper>
