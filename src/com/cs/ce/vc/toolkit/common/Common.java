@@ -1,14 +1,20 @@
 package com.cs.ce.vc.toolkit.common;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -63,7 +69,7 @@ public class Common {
 
 	public static String getCellValue(Cell cell) {
 
-		if (cell == null)
+		if (cell == null||cell.getCellType() == Cell.CELL_TYPE_BLANK)
 			return "";
 
 		if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
@@ -86,6 +92,19 @@ public class Common {
 		return "";
 	}
 
+	// add method of getCellTime
+	public static Timestamp getCellTime(Cell cell){                                 
+		if(cell==null||"".equals(cell)||cell.getCellType() == HSSFCell.CELL_TYPE_BLANK){
+			return null;
+		}else if((cell.getCellType() == Cell.CELL_TYPE_NUMERIC)&&HSSFDateUtil.isCellDateFormatted(cell)){    	
+			    double d = cell.getNumericCellValue();  
+		        Date date = HSSFDateUtil.getJavaDate(d); 
+		        SimpleDateFormat dformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		        return Timestamp.valueOf(dformat.format(date)); 	
+	    }
+		return null;
+		}
+	
 	public static void saveByConfig(String nameSpace, Object obj) {
 
 		sqlSession.insert(nameSpace, obj);
