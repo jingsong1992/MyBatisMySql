@@ -20,9 +20,7 @@ import com.cs.ce.vc.toolkit.vo.IssueSubCategory;
 import com.cs.ce.vc.toolkit.vo.Issues;
 
 public class MyBatisTest {
-	
-
-	
+		
 //	
 //	
 //	@Test
@@ -91,17 +89,33 @@ public class MyBatisTest {
         long starTime=System.currentTimeMillis();
         ReadExcelFunction ref = new ReadExcelFunction();
         List<Issues> list_Issues = ref.getIssues();
-        long  endTime=System.currentTimeMillis();	   
-        System.out.println(endTime-starTime); 
+        	   
+        
         SqlSession session=Common.sqlSession;
         MybitsUtils mybatisuti = session.getMapper(MybitsUtils.class);
-//        for(int i = 0;i<list_Issues.size();i++){
-//        	mybatisuti.addIssueFunc(list_Issues.get(i));
-//        	}
+        for(int i = 0;i<list_Issues.size();i++){
+        	mybatisuti.addIssueFunc(list_Issues.get(i));
+        	}
         List<Issues> excPro = new ReadExcelProject().getExcelData();
 	   for(Issues expro : excPro){
-	   Common.saveByInterface(expro);
+		   mybatisuti.addIssueFunc(expro);
  }
+	  List<IssueBundle> res = new ReadExcelVersion_trace().readExcel();
+	 for(IssueBundle isb:res){
+		 mybatisuti.addIssueBundle(isb);
+ }
+		ReadExcelIntroduction Intrd = new ReadExcelIntroduction(12, 28);
+		List<IssueCategory> ctList = Intrd.getIssue_category();
+	   for(IssueCategory ct : ctList){
+		   mybatisuti.addIssueCategory(ct);
+	   }
+		List<IssueSubCategory> IssSubCtg = new ReadExcelModule(3, 225)
+		.getIssue_sub_cat();
+	   for(IssueSubCategory issuecatg : IssSubCtg){
+		   mybatisuti.addIssueSubCategory(issuecatg);
+	   }
+	   long  endTime=System.currentTimeMillis();
+	   System.out.println(endTime-starTime);
 	   session.commit();      
 	   session.close();        	
 	}
