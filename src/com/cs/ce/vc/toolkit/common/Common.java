@@ -124,7 +124,7 @@ public class Common {
 			mybatisUtils.addIssueSubCategory(issc);
 		}else if(obj instanceof Issues){
 			Issues issues=(Issues) obj;
-			mybatisUtils.addExcelProject(issues);
+			mybatisUtils.addIssueFunc(issues);
 		}
 		
 		sqlSession.commit();

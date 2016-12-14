@@ -64,7 +64,7 @@ public class MyBatisTest {
 //		List<IssueBundle> res = new ReadExcelVersion_trace().readExcel();
 //		List<IssueSubCategory> IssSubCtg = new ReadExcelModule(3, 225)
 //		.getIssue_sub_cat();
-//		List<ExcelProject> excPro = new ReadExcelProject().getExcelData();
+//		List<Issues> excPro = new ReadExcelProject().getExcelData();
 //		
 //	 	   for(IssueCategory ct : ctList){
 //	 		  Common.saveByInterface(ct);
@@ -95,9 +95,13 @@ public class MyBatisTest {
         System.out.println(endTime-starTime); 
         SqlSession session=Common.sqlSession;
         MybitsUtils mybatisuti = session.getMapper(MybitsUtils.class);
-        for(int i = 0;i<list_Issues.size();i++){
-        	mybatisuti.addIssueFunc(list_Issues.get(i));
-        	}
+//        for(int i = 0;i<list_Issues.size();i++){
+//        	mybatisuti.addIssueFunc(list_Issues.get(i));
+//        	}
+        List<Issues> excPro = new ReadExcelProject().getExcelData();
+	   for(Issues expro : excPro){
+	   Common.saveByInterface(expro);
+ }
 	   session.commit();      
 	   session.close();        	
 	}
