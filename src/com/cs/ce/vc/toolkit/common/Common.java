@@ -91,7 +91,7 @@ public class Common {
 		sqlSession.insert(nameSpace, obj);
 		sqlSession.commit();
 	}
-	
+	//asdf
 	public static void saveByInterface(Object obj){
 		MybitsUtils mybatisUtils=sqlSession.getMapper(MybitsUtils.class);
 		if(obj instanceof IssueBundle){
