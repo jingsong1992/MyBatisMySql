@@ -42,8 +42,8 @@ public class ReadExcelIntroduction {
     		  issue.setId(id++);
               
     		  String code = row.getCell(1).getStringCellValue();
-    		  String type = row.getCell(1).getStringCellValue();
-    		  String description = row.getCell(1).getStringCellValue();
+    		  String type = row.getCell(2).getStringCellValue();
+    		  String description = row.getCell(3).getStringCellValue();
     		  
     		  issue.setCode(code);
     		  issue.setType(type);
