@@ -18,7 +18,6 @@ public class ReadExcelFunction {
 	
 	public List<Issues> getIssues(){
 		List<Issues> list_Issues = new ArrayList<Issues>();
-		try {
 			Workbook wb =  Common.getWorkbook();
 			HSSFSheet hssfSheet = (HSSFSheet)wb.getSheetAt(2);
 			String valueType = null;
@@ -102,16 +101,11 @@ public class ReadExcelFunction {
 				}
 			}
 		}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		return list_Issues;  
+	return list_Issues;  
 		
    }
 	
-	public  Map<String, String> SheetFive() throws IOException {
+	public  Map<String, String> SheetFive(){
 		Workbook wb =  Common.getWorkbook();
 		HSSFSheet hssfSheet = (HSSFSheet)wb.getSheetAt(4);
 		Map<String, String> map = new HashMap<String, String>();
