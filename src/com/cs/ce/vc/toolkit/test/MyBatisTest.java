@@ -3,7 +3,11 @@ package com.cs.ce.vc.toolkit.test;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import com.cs.ce.vc.toolkit.common.Common;
@@ -18,11 +22,12 @@ import com.cs.ce.vc.toolkit.vo.IssueBundle;
 import com.cs.ce.vc.toolkit.vo.IssueCategory;
 import com.cs.ce.vc.toolkit.vo.IssueSubCategory;
 import com.cs.ce.vc.toolkit.vo.Issues;
+import com.mysql.jdbc.log.Log4JLogger;
 
 public class MyBatisTest {
 		
 //	
-//	
+
 //	@Test
 //	public void testConfig(){
 //		ReadExcelIntroduction Intrd = new ReadExcelIntroduction(12, 28);
@@ -85,38 +90,45 @@ public class MyBatisTest {
 //	 		
 //	 		Common.closeSqlSession();
 //	}
-	public static void main(String[] args) throws IOException{		
+	public static void main(String[] args){	
+		try{
         long starTime=System.currentTimeMillis();
-        ReadExcelFunction ref = new ReadExcelFunction();
-        List<Issues> list_Issues = ref.getIssues();
-        	   
-        
         SqlSession session=Common.sqlSession;
         MybitsUtils mybatisuti = session.getMapper(MybitsUtils.class);
-        for(int i = 0;i<list_Issues.size();i++){
-        	mybatisuti.addIssueFunc(list_Issues.get(i));
-        	}
-        List<Issues> excPro = new ReadExcelProject().getExcelData();
-	   for(Issues expro : excPro){
-		   mybatisuti.addIssueFunc(expro);
- }
-	  List<IssueBundle> res = new ReadExcelVersion_trace().readExcel();
-	 for(IssueBundle isb:res){
-		 mybatisuti.addIssueBundle(isb);
- }
+//        ReadExcelFunction ref = new ReadExcelFunction();
+//        List<Issues> list_Issues = ref.getIssues();
+//        for(int i = 0;i<list_Issues.size();i++){
+//        	mybatisuti.addIssueFunc(list_Issues.get(i));
+//        	}
+//        List<Issues> excPro = new ReadExcelProject().getExcelData();
+//	   for(Issues expro : excPro){
+//		   mybatisuti.addIssueFunc(expro);
+// }
+//	  List<IssueBundle> res = new ReadExcelVersion_trace().readExcel();
+//	 for(IssueBundle isb:res){
+//		 mybatisuti.addIssueBundle(isb);
+// }
 		ReadExcelIntroduction Intrd = new ReadExcelIntroduction(12, 28);
 		List<IssueCategory> ctList = Intrd.getIssue_category();
 	   for(IssueCategory ct : ctList){
 		   mybatisuti.addIssueCategory(ct);
 	   }
-		List<IssueSubCategory> IssSubCtg = new ReadExcelModule(3, 225)
-		.getIssue_sub_cat();
-	   for(IssueSubCategory issuecatg : IssSubCtg){
-		   mybatisuti.addIssueSubCategory(issuecatg);
-	   }
+//		List<IssueSubCategory> IssSubCtg = new ReadExcelModule(3, 225)
+//		.getIssue_sub_cat();
+//	   for(IssueSubCategory issuecatg : IssSubCtg){
+//		   mybatisuti.addIssueSubCategory(issuecatg);
+//	   }
 	   long  endTime=System.currentTimeMillis();
-	   System.out.println(endTime-starTime);
+	   System.out.println(endTime-starTime);	
 	   session.commit();      
-	   session.close();        	
+	   session.close(); 
+		} catch (Exception e) {
+		    PropertyConfigurator.configure("src/log4j.properties");                  //add catch errof of log4j 
+			Logger logger3 = Logger.getLogger("MyBatisTest.class");
+			logger3.error(e.getMessage());
+		}
 	}
+	
+
+
 }
