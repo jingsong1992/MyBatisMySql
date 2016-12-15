@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<properties resource="path.properties"></properties>
+	<typeAliases>
+		<typeAlias alias="IssueBundle" type="com.cs.ce.vc.toolkit.vo.IssueBundle" />
+		<typeAlias alias="IssueCategory" type="com.cs.ce.vc.toolkit.vo.IssueCategory" />
+		<typeAlias alias="IssueSubCategory" type="com.cs.ce.vc.toolkit.vo.IssueSubCategory" />
+		<typeAlias alias="Issues" type="com.cs.ce.vc.toolkit.vo.Issues"/>
+	</typeAliases>
+
+	<environments default="mysql">
+		<environment id="mysql">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${name}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="mapper.xml" />
+	</mappers>
+</configuration>
+
+
+	

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	<mapper  namespace="com.cs.ce.vc.toolkit.inter.MybitsUtils">
+		<insert id="addIssueBundle" parameterType="IssueBundle">
+		insert into issue_bundle(id,issue_id,bundle_version,ishead,status) values(#{id},#{issue_id},#{bundle_version},#{ishead},#{status})
+		</insert>
+		 <insert id="addIssueCategory" parameterType="IssueCategory"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into issue_category(id,code,type,description)values(#{id},#{code},#{type},#{description}) 
+       </insert> 
+       <insert id="addIssueSubCategory" parameterType="IssueSubCategory"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into issue_sub_category(id,category_id,code,description)values(#{id},#{category_id},#{code},#{description}) 
+       </insert> 
+    	<insert id="addIssueFunc" parameterType="Issues">
+        insert into issues(id,parent_issue_id,code,title,description,gdb_code,rm_code,type,report_version,report_project,report_time,fixed_version,status,fixed_by,fixed_time,sd,close_reason) 
+        					values(#{id},#{parent_issue_id},#{code},#{title},#{description},#{gdb_code},#{rm_code},#{type},#{report_version},#{report_project},#{report_time}
+        					,#{fixed_version},#{status},#{fixed_by},#{fixed_time},#{sd},#{closed_reason})
+        </insert>
+	</mapper>
